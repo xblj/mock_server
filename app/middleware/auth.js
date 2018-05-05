@@ -3,7 +3,7 @@
 module.exports = options => {
   return async function verify(ctx, next) {
     let sess = ctx.cookies.get('sess');
-    console.log(sess);
+    ctx.set('Access-Control-Allow-Credentials', true);
     if(!sess) {
       ctx.status = 401;
       return;

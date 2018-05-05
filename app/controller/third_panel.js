@@ -1,6 +1,7 @@
 'use strict';
 
-const Controller = require('egg').Controller;
+// const Controller = require('egg').Controller;
+const Controller = require('../core/base_controller');
 const Mock = require('mockjs');
 class ThirdPanelController extends Controller {
   async login() {
@@ -24,32 +25,20 @@ class ThirdPanelController extends Controller {
   }
   async logout() {
     this.ctx.cookies.set('sess', null);
-    this.ctx.set('Access-Control-Allow-Credentials', true);
-    this.ctx.body = data;
-    ctx.body = {
-      errcode: 0,
-      data: true
-    }
+   this.success({data: true})
   }
   async getUserInfo() {
-    this.ctx.set('Access-Control-Allow-Credentials', true);
-    this.ctx.body = data;
-    this.ctx.body = {
-      errcode: 0,
-      data: {
-        userName: 'admin'
-      }
-    }
+    this.ctx.session.verifyCode = 0;
+    this.success({
+      userName: 'admin',
+      authKeyList: ['huaf_order_list', 'huaf_order_info']
+    });
   }
   async getVerifyCode() {
     const phone = this.ctx.query.phone;
     this.ctx.session.verifyCode = phone.slice(-4);
     this.ctx.session.phone = phone;
-    this.ctx.set('Access-Control-Allow-Credentials', true);
-    this.ctx.body = {
-      errcode: 0,
-      data: true
-    }
+    this.success(true);
   }
 }
 module.exports = ThirdPanelController;
