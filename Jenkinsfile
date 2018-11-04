@@ -11,5 +11,15 @@ pipeline {
                 sh 'npm install --registry=https://registry.npm.taobao.org'
             }
         }
+       stage('stop') { 
+            steps {
+                sh 'npm stop'
+            }
+        }
+       stage('start') { 
+            steps {
+                sh 'npm start'
+            }
+        }
     }
 }
