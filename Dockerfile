@@ -1,7 +1,8 @@
-FROM node
+FROM mock-demo
 
 WORKDIR /home/project
 
-EXPOSE 3000
+EXPOSE 7001
 
+CMD ["npm","install"]
 CMD ["npm","start"]
